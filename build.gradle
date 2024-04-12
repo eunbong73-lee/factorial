@@ -36,7 +36,7 @@ jib {
 
 	to {
 		image = "eblee73/factorial"
-		tags = ['latest', '0.0.2']
+		tags = ['latest', '0.0.3']
 	}
 
 	container {
