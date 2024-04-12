@@ -16,7 +16,6 @@ spec:
     spec:
       containers:
         - name: factorial
-          terminationGracePeriodSeconds: 60
           image: eblee73/factorial:0.0.3
           lifecycle:
             preStop:
@@ -28,18 +27,20 @@ spec:
               path: /probe/startup
               port: 8080
             initialDelaySeconds: 3
-            periodSeconds: 3
+            periodSeconds: 1
+            failureThreshold: 10
 
           readinessProbe:
             httpGet:
               path: /probe/ready
               port: 8080
-            initialDelaySeconds: 3
-            periodSeconds: 3
+            periodSeconds: 1
+            successThreshold: 2
+            failureThreshold: 5
 
           livenessProbe:
             httpGet:
               path: /probe/live
               port: 8080
-            initialDelaySeconds: 3
-            periodSeconds: 3
+            periodSeconds: 1
+            failureThreshold: 15
